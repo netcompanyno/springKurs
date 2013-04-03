@@ -18,7 +18,7 @@ public class HelloSpring {
         }
         final Greeter greeter=
             new ClassPathXmlApplicationContext(SPRING_CONFIG)
-                          .getBean(Greeter.class);
+                          .getBean("greeter", Greeter.class);
         final String greet= greeter.greet(to);
         System.out.println(greet);
     }

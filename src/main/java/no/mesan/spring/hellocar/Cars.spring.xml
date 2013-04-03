@@ -23,28 +23,31 @@
 
     <bean id="car1"  
           parent="defaultCar"
-          p:make="VW"
-          p:model="Passat"
-          p:year="2010"
-          p:doors="5"
+          p:make="${car1.make}"
+          p:model="${car1.model}"
+          p:year="${car1.year}"
+          p:doors="${car1.doors}"
           p:extras-ref="comfortLine"
           />
 
     <bean id="car2"  
           parent="defaultCar"
-          p:make="VW"
-          p:model="Caravelle"
-          p:year="2009"
-          p:doors="4"
-          p:fourWd="true"
+          p:make="${car2.make}"
+          p:model="${car2.model}"
+          p:year="${car2.year}"
+          p:fourWd="${car2.4wd}"
+          p:doors="${car2.doors}"
+          lazy-init="true"
           />
 
     <bean id="car3"  
           parent="defaultCar"
-          p:make="VW"
-          p:model="Golf"
-          p:year="2008"
-          p:doors="4"
+          p:make="${car3.make}"
+          p:model="${car3.model}"
+          p:year="${car3.year}"
+          p:fourWd="${car3.4wd}"
+          p:doors="${car3.doors}"
+          lazy-init="true"
           />
 
 </beans>

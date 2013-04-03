@@ -9,7 +9,7 @@ package no.mesan.utils;
 public final class ClassUtils {
 
     /** Full path with trailing slash, up to, but not including, class name. */
-    public static String pathToClass(final Class clazz) {
+    public static String pathToClass(final Class<?> clazz) {
         return clazz.getName()
                     .replaceAll("[.][^.]+$", "")
                     .replaceAll("[.]", "/")

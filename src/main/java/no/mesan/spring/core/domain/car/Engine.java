@@ -1,10 +1,15 @@
 package no.mesan.spring.core.domain.car;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 /** Important for a functional car... */
 public class Engine {
 
+    @NotNull
     private long id;
+
+    @NotNull @Min(0)
     private double kw;
 
     public long getId() {

@@ -3,7 +3,8 @@ package no.mesan.spring.car.xml;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
+
+import no.mesan.utils.test.BaseSpringTest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
@@ -13,7 +14,7 @@ import static org.junit.Assert.assertTrue;
 
 /** Test CarApp. */
 @ContextConfiguration("Car.spring.xml")
-public class CarAppTest extends AbstractJUnit4SpringContextTests {
+public class CarAppTest extends BaseSpringTest {
 
     /** Test object 1. */
     private Car car;

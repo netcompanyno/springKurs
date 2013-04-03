@@ -1,10 +1,12 @@
 package no.mesan.spring.core.service.tax.impl;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Properties;
+
+import javax.inject.Inject;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import no.mesan.spring.core.domain.car.Car;
 import no.mesan.spring.core.domain.car.Engine;
@@ -23,32 +25,20 @@ import no.mesan.spring.core.service.tax.TaxSpec;
  *   B: aldersfradrag på A
  *   SUM: A-B
  */
+@Service
 public class AnnualTaxService implements TaxService {
 
-    private final TaxRates taxRates;
-    private final String lowName;
-    private final String highName;
-    private final String noneName;
+    @Inject
+    private TaxRates taxRates;
 
+    @Value("${taxes.rates.annual.small.name}")
+    private String lowName;
 
-    /**
-     * Default constructor for AnnualTaxService.
-     */
-    public AnnualTaxService() {
-        this.taxRates= new TaxRates();
-        final InputStream stream=
-            getClass().getResourceAsStream("/no/mesan/spring/core/carTax.properties");
-        final Properties props= new Properties();
-        try {
-            props.load(stream);
-        }
-        catch (final IOException e) {
-            throw new RuntimeException(e);
-        }
-        this.lowName= props.getProperty("taxes.rates.annual.small.name");
-        this.highName= props.getProperty("taxes.rates.annual.big.name");
-        this.noneName= props.getProperty("taxes.rates.annual.none.name");
-    }
+    @Value("${taxes.rates.annual.big.name}")
+    private String highName;
+
+    @Value("${taxes.rates.annual.none.name}")
+    private String noneName;
 
     @Override
     public Tax calculateTax(final Car car) {

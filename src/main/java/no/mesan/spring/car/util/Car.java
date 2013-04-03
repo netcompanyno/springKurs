@@ -33,6 +33,7 @@ public class Car {
         return this.doors;
     }
 
+    @Required
     public void setDoors(final int doors) {
         this.doors= doors;
     }

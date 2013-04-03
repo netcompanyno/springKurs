@@ -16,7 +16,8 @@
     <bean id="defaultEngine"  
          class="no.mesan.spring.car.util.Engine"
          p:cylinders="4"
-         p:kw="103">
+         p:kw="103"
+         scope="prototype">
         <constructor-arg value="TSI 2.2"/>
     </bean>
 
@@ -25,16 +26,24 @@
           p:model="Passat"
           p:fourWd="false"
           p:doors="5"
-          p:engine-ref="defaultEngine">
+          p:engine-ref="defaultEngine"
+          p:extras-ref="comfortLine">
         <constructor-arg value="VW"/>
         <constructor-arg value="2010"/>
     </bean>
-     
+    
+    <util:list id="comfortLine">
+        <value>Integrerte blinklys</value>
+        <value>Støtlister</value>
+        <value>R-edt designpakke</value>
+    </util:list>
+    
 
     <bean id="oldCar"  
           class="no.mesan.spring.car.util.Car"
           p:model="Passat"
           p:fourWd="false"
+          p:doors="4"
           p:engine-ref="defaultEngine">
         <constructor-arg value="VW"/>
         <constructor-arg value="2009"/>

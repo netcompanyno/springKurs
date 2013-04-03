@@ -2,11 +2,15 @@ package no.mesan.spring.core.service.invoice.impl;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.test.context.ContextConfiguration;
 
 import no.mesan.spring.core.service.domain.car.TestCarRepository;
 import no.mesan.spring.core.service.tax.Tax;
+import no.mesan.utils.test.BaseSpringTest;
 
 import static org.junit.Assert.assertEquals;
 
@@ -14,14 +18,15 @@ import static org.junit.Assert.assertEquals;
 /**
  * Test {@link CarInvoiceService}.
  */
-public class CarInvoiceServiceTest  /*extends BaseSpringTest*/ {
+@ContextConfiguration("/no/mesan/spring/core/carTax.spring.xml")
+public class CarInvoiceServiceTest extends BaseSpringTest {
 
-    private final CarInvoiceService service= new CarInvoiceService();
-    private TestCarRepository testRepo;
+    @Inject private CarInvoiceService service;
+    @Inject private TestCarRepository testRepo;
 
     @Before
     public void setUp()  {
-        this.testRepo= new TestCarRepository();
+        this.testRepo.reset();
         this.service.setRepository(this.testRepo);
     }
 

@@ -2,18 +2,15 @@ package no.mesan.spring.hello.xml;
 
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
-import no.mesan.spring.hello.xml.Greeter;
-import no.mesan.spring.hello.xml.HtmlFormatter;
-import no.mesan.spring.hello.xml.TextFormatter;
+import no.mesan.utils.test.BaseSpringTest;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 
 @ContextConfiguration("Hello.spring.xml")
-public class GreeterTest extends AbstractJUnit4SpringContextTests {
+public class GreeterTest extends BaseSpringTest {
 
     private Greeter greeter= new Greeter();
 

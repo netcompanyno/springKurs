@@ -1,5 +1,7 @@
 package no.mesan.spring.core.service.tax.impl;
 
+import javax.inject.Inject;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,7 +14,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class AnnualTaxServiceTest extends TaxServiceTest {
 
-    private AnnualTaxService service= new AnnualTaxService();
+    @Inject private AnnualTaxService service;
 
 
     @Before

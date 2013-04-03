@@ -5,7 +5,29 @@
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	                       http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean class="no.mesan.spring.car.xml.Engine">
+    <bean id="defaultEngine"  
+         class="no.mesan.spring.car.xml.Engine"
+         p:cylinders="4"
+         p:kw="103">
+        <constructor-arg value="TSI 2.2"/>
+    </bean>
+
+    <bean id="car"  
+          class="no.mesan.spring.car.xml.Car"
+          p:model="Passat"
+          p:fourWd="false"
+          p:engine-ref="defaultEngine">
+        <constructor-arg value="VW"/>
+        <constructor-arg value="2010"/>
+    </bean>
+
+    <bean id="oldCar"  
+          class="no.mesan.spring.car.xml.Car"
+          p:model="Passat"
+          p:fourWd="false"
+          p:engine-ref="defaultEngine">
+        <constructor-arg value="VW"/>
+        <constructor-arg value="2009"/>
     </bean>
 
 </beans>

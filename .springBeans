@@ -13,6 +13,7 @@
 		<config>src/main/java/no/mesan/spring/hello/xml/Hello.spring.xml</config>
 		<config>src/main/java/no/mesan/spring/hellocar/HelloCar.spring.xml</config>
 		<config>src/main/java/no/mesan/spring/car/util/UtilCar.spring.xml</config>
+		<config>src/main/java/no/mesan/spring/core/carTax.spring.xml</config>
 	</configs>
 	<configSets>
 	</configSets>

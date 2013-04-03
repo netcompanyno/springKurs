@@ -3,6 +3,8 @@ package no.mesan.spring.core.service.invoice.impl;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.junit.Before;
 
 import no.mesan.spring.core.domain.car.Car;
@@ -16,7 +18,7 @@ import no.mesan.spring.core.service.tax.impl.AnnualTaxServiceTest;
  * Kjør årsavgifttestene via InvoiceService.
  */
 public class CarInvoiceServiceAsAnnualTaxServiceTest extends AnnualTaxServiceTest {
-    private final CarInvoiceService carInvoiceService= new CarInvoiceService();
+    @Inject private CarInvoiceService carInvoiceService;
 
     private static final Tax NO_TAX;
     static {

@@ -1,50 +1,35 @@
 package no.mesan.spring.core.service.tax;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 
 /**
  * Gjeldende avgifter.  Kommer sikkert til å øke.
  */
+@Component
 public class TaxRates {
 
-    private final double importBase;
-    private final double weightRate;
-    private final double effectRate;
-    private final double ageReductionFactor;
-    private final double annualSmallCar;
-    private final int annualSmallWeightMax;
-    private final double annualBigCar;
+    @Value("${taxes.rates.import.base}")
+    private double importBase;
 
+    @Value("${taxes.rates.import.weightRate}")
+    private double weightRate;
 
-    /**
-     * Default constructor for TaxRates.
-     */
-    public TaxRates() {
-        final InputStream stream=
-            getClass().getResourceAsStream("/no/mesan/spring/core/carTax.properties");
-        final Properties props= new Properties();
-        try {
-            props.load(stream);
-        }
-        catch (final IOException e) {
-            throw new RuntimeException(e);
-        }
-        this.importBase= getDouble(props, "import.base");
-        this.weightRate= getDouble(props, "import.weightRate");
-        this.effectRate= getDouble(props, "import.effectRate");
-        this.ageReductionFactor= getDouble(props, "import.ageReductionFactor");
-        this.annualSmallCar= getDouble(props, "annual.smallCars");
-        this.annualBigCar= getDouble(props, "annual.bigCars");
-        this.annualSmallWeightMax=
-            Integer.parseInt(props.getProperty("taxes.rates.annual.small.weightMax"));
-    }
+    @Value("${taxes.rates.import.effectRate}")
+    private double effectRate;
 
-    private double getDouble(final Properties props, final String key) {
-        return Double.parseDouble(props.getProperty("taxes.rates." + key));
-    }
+    @Value("${taxes.rates.import.ageReductionFactor}")
+    private double ageReductionFactor;
+
+    @Value("${taxes.rates.annual.smallCars}")
+    private double annualSmallCar;
+
+    @Value("${taxes.rates.annual.small.weightMax}")
+    private int annualSmallWeightMax;
+
+    @Value("${taxes.rates.annual.bigCars}")
+    private double annualBigCar;
 
     public double getImportBase() {
         return this.importBase;

@@ -3,9 +3,13 @@ package no.mesan.spring.core.service.invoice.impl;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import org.springframework.stereotype.Service;
+
 import no.mesan.spring.core.domain.car.Car;
 import no.mesan.spring.core.domain.car.CarRepository;
-import no.mesan.spring.core.service.domain.car.DbCarRepository;
 import no.mesan.spring.core.service.invoice.InvoiceService;
 import no.mesan.spring.core.service.tax.Tax;
 import no.mesan.spring.core.service.tax.impl.AnnualTaxService;
@@ -15,21 +19,17 @@ import no.mesan.spring.core.service.tax.impl.ImportTaxService;
 /**
  * Implementasjon av {@link InvoiceService}.
  */
+@Service
 public class CarInvoiceService implements InvoiceService {
 
-    private final AnnualTaxService annualTaxService;
-    private final ImportTaxService importTaxService;
+    @Inject
+    private AnnualTaxService annualTaxService;
+
+    @Inject
+    private ImportTaxService importTaxService;
+
+    @Inject @Named("stdCarRepository")
     private CarRepository repository;
-
-
-    /**
-     * Default constructor for CarInvoiceService.
-     */
-    public CarInvoiceService() {
-        this.annualTaxService= new AnnualTaxService();
-        this.importTaxService= new ImportTaxService();
-        this.repository= new DbCarRepository();
-    }
 
     public void setRepository(final CarRepository repository) {
         this.repository= repository;

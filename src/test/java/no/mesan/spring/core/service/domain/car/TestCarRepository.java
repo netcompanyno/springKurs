@@ -3,6 +3,8 @@ package no.mesan.spring.core.service.domain.car;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import no.mesan.spring.core.domain.car.Car;
 import no.mesan.spring.core.domain.car.CarRepository;
 import no.mesan.spring.core.domain.car.Engine;
@@ -11,6 +13,7 @@ import no.mesan.spring.core.domain.car.Engine;
 /**
  * Mockutgave av {@link CarRepository}.
  */
+@Repository
 public class TestCarRepository implements CarRepository {
 
     private static final String CAR_SPECS[]= {

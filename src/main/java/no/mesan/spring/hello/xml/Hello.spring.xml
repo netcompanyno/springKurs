@@ -5,7 +5,13 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	                    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 	                    
-    <!-- Må vel ha noe her... -->
-    <bean  class="no.mesan.spring.hello.xml.Greeter" />
+    <bean id="greeter" 
+         class="no.mesan.spring.hello.xml.Greeter">
+        <property name="formatter" ref="xmlFormatter"/>
+    </bean>
+
+    <bean id="htmlFormatter" class="no.mesan.spring.hello.xml.HtmlFormatter"/>
+    <bean id="textFormatter"  class="no.mesan.spring.hello.xml.TextFormatter"/>
+    <bean id="xmlFormatter" class="no.mesan.spring.hello.xml.XmlFormatter"/>
 
 </beans>

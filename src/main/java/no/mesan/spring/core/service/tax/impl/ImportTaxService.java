@@ -1,10 +1,12 @@
 package no.mesan.spring.core.service.tax.impl;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Properties;
+
+import javax.inject.Inject;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import no.mesan.spring.core.domain.car.Car;
 import no.mesan.spring.core.domain.car.Engine;
@@ -12,7 +14,6 @@ import no.mesan.spring.core.service.tax.Tax;
 import no.mesan.spring.core.service.tax.TaxRates;
 import no.mesan.spring.core.service.tax.TaxService;
 import no.mesan.spring.core.service.tax.TaxSpec;
-import no.mesan.spring.core.service.util.StdTimeService;
 import no.mesan.spring.core.service.util.TimeService;
 
 
@@ -23,37 +24,28 @@ import no.mesan.spring.core.service.util.TimeService;
  *   B: aldersfradrag på A (aldri >0, aldri mer enn A)
  *   SUM: A-B
  */
+@Service
 public class ImportTaxService implements TaxService {
 
     private static final double PERCENT= 0.01D;
-    private final TaxRates taxRates;
-    private final TimeService timeService;
-    private final String baseName;
-    private final String weightName;
-    private final String effectName;
-    private final String ageName;
 
+    @Inject
+    private TaxRates taxRates;
 
-    /**
-     * Default constructor for ImportTaxService.
-     */
-    public ImportTaxService() {
-        this.taxRates= new TaxRates();
-        this.timeService= new StdTimeService();
-        final InputStream stream=
-            getClass().getResourceAsStream("/no/mesan/spring/core/carTax.properties");
-        final Properties props= new Properties();
-        try {
-            props.load(stream);
-        }
-        catch (final IOException e) {
-            throw new RuntimeException(e);
-        }
-        this.baseName= props.getProperty("taxes.rates.import.base.name");
-        this.weightName= props.getProperty("taxes.rates.import.weight.name");
-        this.effectName= props.getProperty("taxes.rates.import.effect.name");
-        this.ageName= props.getProperty("taxes.rates.import.age.name");
-    }
+    @Inject
+    private TimeService timeService;
+
+    @Value("${taxes.rates.import.base.name}")
+    private String baseName;
+
+    @Value("${taxes.rates.import.weight.name}")
+    private String weightName;
+
+    @Value("${taxes.rates.import.effect.name}")
+    private String effectName;
+
+    @Value("${taxes.rates.import.age.name}")
+    private String ageName;
 
     @Override
     public Tax calculateTax(final Car car) {

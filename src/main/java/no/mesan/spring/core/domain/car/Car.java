@@ -1,15 +1,34 @@
 package no.mesan.spring.core.domain.car;
 
+import javax.annotation.Resource;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.beans.factory.annotation.Required;
 
 /** A car... */
 public class Car implements Cloneable {
 
+    @NotNull
     private long id;
+
+    @NotNull @Size(min=1, max=128)
     private String make;
+
+    @NotNull @Size(min=1, max=128)
     private String model;
+
+    @Min(1900) @Max(2050)
     private int year;
+
+    @Min(0)
     private int weight;
+
     private boolean importTaxed;
+
+    @Resource
     private Engine engine;
 
     public int age(final int relativeTo) {
@@ -52,6 +71,7 @@ public class Car implements Cloneable {
         return this.model;
     }
 
+    @Required
     public void setModel(final String model) {
         this.model= model;
     }
@@ -68,6 +88,7 @@ public class Car implements Cloneable {
         return this.make;
     }
 
+    @Required
     public void setMake(final String make) {
         this.make= make;
     }
