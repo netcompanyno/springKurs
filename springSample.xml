@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       default-autowire="no"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:jms="http://www.springframework.org/schema/jms"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop.xsd
+                           http://www.springframework.org/schema/jee
+                           http://www.springframework.org/schema/jms/spring-jee.xsd
+                           http://www.springframework.org/schema/jms
+                           http://www.springframework.org/schema/jms/spring-jms.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/util
+                           http://www.springframework.org/schema/util/spring-util.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <context:annotation-config/>
+    <context:property-placeholder
+          location="classpath:myApp.properties,classpath:myaApp.local.properties"/>
+    <context:component-scan base-package="no.mesan.spring.dao">
+        <context:include-filter
+              type="annotation"
+              expression="org.springframework.stereotype.Repository"/>
+    </context:component-scan>
+
+    <bean id="defaultEngine"
+          name="spareEngine tsiEngine"
+          class="no.mesan.spring.car.xml.Engine"
+          scope="singleton">
+        <constructor-arg value="TSI 2.2"/>
+        <property name="cylinders" value="4" />
+        <property name="kw">
+            <value type="double">5500</value>
+        </property>
+    </bean>
+
+    <alias name="defaultEngine" alias="vroom"/>
+
+    <bean id="defaultCar"
+          class="no.mesan.spring.car.xml.Car"
+          abstract="true"
+          p:model="Passat"
+          p:fourWd="false"
+          p:engine-ref="defaultEngine"/>
+
+    <util:list id="comfortLine">
+        <value>Integrerte blinklys</value>
+        <value>Støtlister</value>
+        <value>R-edt designpakke</value>
+    </util:list>
+
+    <bean id="myCar"
+          parent="defaultCar"
+          dependency-check="objects"
+          lazy-init="true"
+          p:extras-ref="comfortLine">
+        <constructor-arg index="0" value="Volkswagen"/>
+        <constructor-arg><value>2010</value></constructor-arg>
+        <property name="engine"><ref local="defaultEngine"/></property>
+    </bean>
+
+    <util:property-path id="myEngineCylinders"
+                        path="myCar.engine.cylinders"/>
+
+    <bean id="newCar"
+          class="no.mesan.spring.car.xml.Car"
+          scope="prototype"
+          p:model="Passat"
+          p:fourWd="false">
+        <constructor-arg value="VW"/>
+        <constructor-arg value="2010"/>
+        <property name="engine">
+            <bean class="no.mesan.spring.car.xml.Engine"
+                  p:cylinders="6"
+                  p:kw="6250">
+                <constructor-arg value="V6 FSI DSG"/>
+            </bean>
+        </property>
+    </bean>
+
+    <util:constant id="shark" static-field="no.mesan.spring.Fish.SHARK"/>
+
+    <bean id="dataSource"
+          class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close"
+          p:driverClassName="${app.db.driver}"
+          p:url="${app.db.jdbc.pfx}${app.db.jdbc.url}"
+          p:username="${app.db.user}"
+          p:password="${app.db.pass}"/>
+
+    <bean id="messageSource" 
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>format</value>
+                <value>exceptions</value>
+                <value>windows</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="loggingMBean"
+          class="no.mesan.felles.logging.Log4jMBean" />
+
+    <bean id="statisticsMBean"
+          class="org.hibernate.jmx.StatisticsService"
+          p:statisticsEnabled="true"
+          p:sessionFactory-ref="sessionFactory"/>
+
+    <bean id="jmxExporter"
+          class="org.springframework.jmx.export.MBeanExporter">
+        <property name="beans">
+            <map>
+                <entry key="no.mesan:name=logging" value-ref="loggingMBean"/>
+                <entry key="no.mesan:name=hibernateStatistics"
+                       value-ref="statisticsMBean"/>
+            </map>
+        </property>
+        <property name="registrationBehaviorName"
+                  value="REGISTRATION_REPLACE_EXISTING"/>
+    </bean>
+
+    <bean id="wlsTemplate" class="org.springframework.jndi.JndiTemplate">
+        <property name="environment">
+            <props>
+                <prop key="java.naming.factory.initial">weblogic.jndi.WLInitialContextFactory</prop>
+                <prop key="java.naming.factory.url.pkgs">weblogic.jndi</prop>
+                <prop key="java.naming.provider.url">t3://localhost:8003</prop>
+                <prop key="java.naming.security.principal">wlsuser</prop>
+                <prop key="java.naming.security.credentials">secr3t</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="secretService"
+          class="org.springframework.ejb.access.SimpleRemoteStatelessSessionProxyFactoryBean"
+          lazy-init="true"
+          p:jndiName="no.mesan.service.ejb.SecretService"
+          p:businessInterface="no.mesan.service.SecretService"
+          p:jndiTemplate-ref="wlsTemplate"/>
+
+
+    <jee:jndi-lookup id="otherDataSource"
+                     jndi-name="jdbc/MyDataSource"/>
+    <jee:local-slsb id="simpleSlsb"
+                    jndi-name="ejb/RentalServiceBean"
+                    business-interface="com.foo.service.RentalService"/>
+    <jee:remote-slsb id="complexRemoteEjb"
+                     jndi-name="ejb/MyRemoteBean"
+                     business-interface="com.foo.service.RentalService"
+                     cache-home="true"
+                     lookup-home-on-startup="true"
+                     resource-ref="true"
+                     home-interface="com.foo.service.RentalService"
+                     refresh-home-on-connect-failure="true"/>
+
+    <bean id="thingy"
+          class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition"
+          p:portTypeName="Thingy"
+          p:locationUri="/strangeService/"
+          p:requestSuffix="-req"
+          p:responseSuffix="-resp">
+        <property name="schema">
+            <bean class="org.springframework.xml.xsd.SimpleXsdSchema"
+                  p:xsd="classpath:/thing.xsd" />
+        </property>
+    </bean>
+    <bean class="org.springframework.ws.server.endpoint.mapping.PayloadRootAnnotationMethodEndpointMapping"/>
+    <bean class="org.springframework.ws.server.endpoint.adapter.MarshallingMethodEndpointAdapter">
+        <constructor-arg ref="marshaller"/>
+    </bean>
+    <bean id="marshaller"
+          class="org.springframework.oxm.jaxb.Jaxb2Marshaller"
+          p:contextPath="thing.schema.beans" />
+
+    <bean id="emailPattern" class="java.util.regex.Pattern" factory-method="compile">
+        <constructor-arg value="([a-zA-Z/\d_\\\.]+@([a-zA-Z\d_\\\.]+)(\.[a-zA-Z\d]{2,4}))|([a-zA-Z/\\d_\\\.]+@)[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3}\.[\d]{1,3}"/>
+    </bean>
+
+    <context:property-override location="classpath*:/**/override.properties"/>
+    <import resource="classpath:override.spring.xml"/>
+
+</beans>
