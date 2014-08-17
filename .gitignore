@@ -1,3 +1,19 @@
+.DS_Store
+
+# Maven og Eclipse-ting
+target/
+.project
+.classpath
+.settings/
+*.versionsBackup
+
+# IDEA-ting
+*.iml
+*.ipr
+*.iws
+*.ids
+/.idea
+
 *.class
 
 .svn/

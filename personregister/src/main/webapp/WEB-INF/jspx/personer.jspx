@@ -1,0 +1,21 @@
+<jsp:root
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:jsp="http://java.sun.com/JSP/Page"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:form="http://www.springframework.org/tags/form"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+    version="2.1">
+
+  <jsp:directive.page contentType="text/html;charset=utf-8"/>
+
+  <c:url value="/personer" var="personerURL"/>
+  <form:form method="get" action="${personerURL}" id="personerForm">
+    <c:forEach items="${personer}" var="person">
+      <c:url value="/person/${person.id}" var="personUrl" />
+      <a href="${personUrl}">${person.fornavn}</a>
+      <br/>
+    </c:forEach>
+
+  </form:form>
+
+</jsp:root>

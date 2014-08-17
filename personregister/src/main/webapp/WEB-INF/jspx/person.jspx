@@ -1,0 +1,33 @@
+<jsp:root
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:jsp="http://java.sun.com/JSP/Page"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:form="http://www.springframework.org/tags/form"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+    version="2.1">
+  <jsp:directive.page contentType="text/html;charset=utf-8"/>
+
+  <c:url value="/person" var="personerURL"/>
+  <form:form method="get" action="${personURL}" id="personForm">
+    <div style="display:table">
+      <div style="display:table-row">
+        <div style="display:table-cell">
+          <label for="fornavn">Fornavn</label>
+        </div>
+        <div style="display:table-cell">
+          <input id="fornavn" type="text" disabled="disabled" value="${person.fornavn}" />
+        </div>
+      </div>
+      <div style="display:table-row">
+        <div style="display:table-cell">
+          <label for="etternavn">Etternavn</label>
+        </div>
+        <div style="display:table-cell">
+          <input id="etternavn" type="text" disabled="disabled" value="${person.etternavn}" />
+        </div>
+      </div>
+    </div>
+  </form:form>
+
+
+</jsp:root>
