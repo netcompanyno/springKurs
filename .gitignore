@@ -6,6 +6,7 @@ target/
 .classpath
 .settings/
 *.versionsBackup
+**/classes
 
 # IDEA-ting
 *.iml
