@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       default-autowire="byName"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/util
+                           http://www.springframework.org/schema/util/spring-util.xsd">
+                           
+    <bean id="defaultCar"
+          abstract="true"
+          class="no.mesan.spring.hellocar.Car"
+          p:make="Unspecified - please override"
+          p:model="Unspecified - please override"
+          p:fourWd="false"
+          p:engine-ref="defaultEngine"
+          />
+
+    <bean id="car1"  
+          parent="defaultCar"
+          p:make="VW"
+          p:model="Passat"
+          p:year="2010"
+          p:doors="5"
+          p:extras-ref="comfortLine"
+          />
+
+    <bean id="car2"  
+          parent="defaultCar"
+          p:make="VW"
+          p:model="Caravelle"
+          p:year="2009"
+          p:doors="4"
+          p:fourWd="true"
+          />
+
+    <bean id="car3"  
+          parent="defaultCar"
+          p:make="VW"
+          p:model="Golf"
+          p:year="2008"
+          p:doors="4"
+          />
+
+</beans>
