@@ -7,7 +7,7 @@ package no.mesan.spring.utils;
 public class PersonregisterStarter extends AbstractJettyStarter {
 
     private PersonregisterStarter() {
-        super(8080, "personregister/src/main/webapp", "/personregister");
+        super(8080, "src/main/webapp", "/personregister");
     }
 
     public static void main(final String... args) throws Exception {
@@ -18,5 +18,4 @@ public class PersonregisterStarter extends AbstractJettyStarter {
     protected void setupProperties() {
 
     }
-
 }
