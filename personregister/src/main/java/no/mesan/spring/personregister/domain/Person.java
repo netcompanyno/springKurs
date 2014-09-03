@@ -32,7 +32,7 @@ public class Person {
     private String epostadresse;
 
     @SuppressWarnings("unused")
-    private Person() {
+    protected Person() {
         //Hibernate sin konstrukør
     }
 
