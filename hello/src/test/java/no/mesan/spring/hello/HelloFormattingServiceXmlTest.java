@@ -8,12 +8,14 @@ import no.mesan.spring.hello.felles.XmlFormatter;
 import no.mesan.spring.hello.xml.HelloFormattingServiceXml;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * Første sett med oppgaver, konfigurasjon av Spring vha xml.
  */
+@Ignore
 public class HelloFormattingServiceXmlTest {
 
     private HelloFormattingServiceXml helloFormattingServiceXml;
