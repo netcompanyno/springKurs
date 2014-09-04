@@ -1,5 +1,6 @@
 package no.mesan.spring.hello.xml;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
@@ -12,6 +13,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 
+@Ignore
 @ContextConfiguration("Hello.spring.xml")
 public class GreeterTest extends AbstractJUnit4SpringContextTests {
 

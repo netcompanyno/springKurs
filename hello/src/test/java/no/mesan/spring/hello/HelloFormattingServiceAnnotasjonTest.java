@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import javax.inject.Inject;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -15,6 +16,7 @@ import no.mesan.spring.hello.felles.HtmlFormatter;
 /**
  * Andre sett med oppgaver, konfigurasjon med annotasjoner.
  */
+@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring/applicationContext-annotasjon.xml")
 public class HelloFormattingServiceAnnotasjonTest {

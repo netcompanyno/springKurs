@@ -1,6 +1,7 @@
 package no.mesan.spring.car.xml;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
@@ -12,6 +13,7 @@ import static org.junit.Assert.assertTrue;
 
 
 /** Test CarApp. */
+@Ignore
 @ContextConfiguration("Car.spring.xml")
 public class CarAppTest extends AbstractJUnit4SpringContextTests {
 
