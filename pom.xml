@@ -60,34 +60,7 @@
         </configuration>
       </plugin>
     </plugins>
-    <resources>
-      <resource>
-        <filtering>false</filtering>
-        <directory>${basedir}/src/main/java</directory>
-        <includes>
-          <include>**/*</include>
-        </includes>
-      </resource>
-    </resources>
-    <testResources>
-      <testResource>
-        <filtering>false</filtering>
-        <directory>${basedir}/src/test/java</directory>
-        <includes>
-          <include>**/*</include>
-        </includes>
-      </testResource>
-    </testResources>
   </build>
-
-  <profiles>
-    <profile>
-      <id>spring2</id>
-      <properties>
-        <spring.version>2.5.6</spring.version>
-      </properties>
-    </profile>
-  </profiles>
 
   <properties>
     <spring.version>4.0.6.RELEASE</spring.version>
