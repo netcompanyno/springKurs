@@ -9,31 +9,32 @@
                                  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
                                  http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-  <!-- JPA-ting -->
-  <bean id="sqlDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" lazy-init="true">
-    <property name="driverClassName" value="org.hsqldb.jdbc.JDBCDriver"/>
-    <property name="url" value="jdbc:hsqldb:mem:test"/>
-    <property name="username" value="sa"/>
-    <property name="password" value=""/>
-  </bean>
+    <!-- Det er ikke nødvendig å endre denne filen! -->
+    <!-- JPA-ting -->
+    <bean id="sqlDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" lazy-init="true">
+        <property name="driverClassName" value="org.hsqldb.jdbc.JDBCDriver"/>
+        <property name="url" value="jdbc:hsqldb:mem:test"/>
+        <property name="username" value="sa"/>
+        <property name="password" value=""/>
+    </bean>
 
-  <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-    <property name="dataSource" ref="sqlDataSource" />
-    <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
-    <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml"/>
-  </bean>
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="sqlDataSource" />
+        <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
+        <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml"/>
+    </bean>
 
-  <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-    <property name="databasePlatform" value="org.hibernate.dialect.HSQLDialect" />
-    <property name="generateDdl" value="true" />
-    <property name="showSql" value="false" />
-  </bean>
+    <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+        <property name="databasePlatform" value="org.hibernate.dialect.HSQLDialect" />
+        <property name="generateDdl" value="true" />
+        <property name="showSql" value="false" />
+    </bean>
 
-  <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-    <property name="entityManagerFactory" ref="entityManagerFactory"/>
-  </bean>
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
 
-  <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
-  <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 
 </beans>

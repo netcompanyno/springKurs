@@ -14,8 +14,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * Første sett med oppgaver, konfigurasjon av Spring vha xml.
+ *
+ * OBS! Det er ikke lov å endre denne filen!
  */
-@Ignore
 public class HelloFormattingServiceXmlTest {
 
     private HelloFormattingServiceXml helloFormattingServiceXml;
@@ -32,6 +33,7 @@ public class HelloFormattingServiceXmlTest {
      * Oppgave 1:
      * Definer en bønne for {@link HelloFormattingServiceXml} ved hjelp av xml, i filen applicationContext-xml.xml.
      */
+    @Ignore
     @Test
     public void lagBonneForHelloFormattingService() {
         assertNotNull(helloFormattingServiceXml);
@@ -45,11 +47,16 @@ public class HelloFormattingServiceXmlTest {
      * Bruk testen sePaUtskrift for å se hva {@link HelloFormattingServiceXml} produserer.
      * Få deretter testene under til å kjøre, en og en (alle blir ikke grønne samtidig..)
      */
+    @Ignore
     @Test
     public void sePaUtskrift() {
         System.out.println(helloFormattingServiceXml.getHello("world"));
     }
 
+    /**
+     * Sørg for å injecte en bønne av klassen HtmlFormatter i HelloFormattingServiceXml.
+     */
+    @Ignore
     @Test
     public void htmlFormatteringMedBonne() {
         assertEquals("<b>Hello, <i>world</i>!</b>", helloFormattingServiceXml.getHello("world"));
@@ -58,15 +65,22 @@ public class HelloFormattingServiceXmlTest {
     }
 
     /**
-     * Tips:
-     *      - Nå trenger man en variabel som kan holde på alle tre formatter-klassene. Har de noe til felles?
+     * Sørg for å injecte en bønne av klassen XmlFormatter i HelloFormattingServiceXml.
+     *
+     * Man ønsker ikke å måtte endre på HelloFormattingServiceXml hver gang man bytter formaterer. Har formatererene noe
+     * til felles som gjør at man kan definere en variabel i HelloFormattingServiceXml som kan holde på en vilkårlig av dem?
      */
+    @Ignore
     @Test
     public void xmlFormatteringMedBonne() {
         assertEquals("<message to='world'><greet>Hello</greet></message>", helloFormattingServiceXml.getHello("world"));
         assertNotNull(applicationContext.getBean(XmlFormatter.class));
     }
 
+    /**
+     * Sørg for å injecte en bønne av klassen TextFormatter i HelloFormattingServiceXml.
+     */
+    @Ignore
     @Test
     public void textFormatteringMedBonne() {
         assertEquals("Hello, world!", helloFormattingServiceXml.getHello("world"));
@@ -79,9 +93,9 @@ public class HelloFormattingServiceXmlTest {
      * "Hello" konfigurerbart, og injecte denne ved hjelp av Spring. Sørg for at testen under blir grønn ved å injecte
      * riktig verdi.
      *
-     * For enkelhets skyld, bruk {@link TextFormatter}.
-     *
+     * - For enkelhets skyld, bruk {@link TextFormatter}.
      */
+    @Ignore
     @Test
     public void holaMundo() {
         assertEquals("¡Hola, mundo!", helloFormattingServiceXml.getHello("mundo"));
@@ -96,6 +110,7 @@ public class HelloFormattingServiceXmlTest {
      *       - For å referere til en property, bruk: ${navn.pa.property}
      *       - Man må fortelle Spring hvor den finner properties...
      */
+    @Ignore
     @Test
     public void bonjourMonde() {
         assertEquals("Bonjour, monde!", helloFormattingServiceXml.getHello("monde"));
@@ -105,5 +120,6 @@ public class HelloFormattingServiceXmlTest {
      * Oppgave 5 (bonus):
      *
      * Gjør om til constructor-arg injection hvis du brukte property-injection, og vice versa.
+     * (Gjelder det som ble gjort i oppgave 4/5)
      */
 }

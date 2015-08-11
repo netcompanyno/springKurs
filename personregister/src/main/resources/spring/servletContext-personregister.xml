@@ -6,36 +6,38 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
                                  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
                                  http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
-  <context:component-scan base-package="no.mesan.spring.personregister.controller" />
 
-  <!-- Aktiverer annoteringer av klasser og metoder -->
-  <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
-    <property name="interceptors">
-      <bean class="no.mesan.spring.personregister.util.FlashScopeInterceptor"/>
-    </property>
-  </bean>
+    <!-- Det er ikke nødvendig å endre denne filen! -->
+    <context:component-scan base-package="no.mesan.spring.personregister.controller" />
 
-  <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-    <!-- Deaktiverer caching med http headere.
-         Trykk på tilbake-knapp i nettleser skal føre til at data hentes på nytt.
-         Dette fungerer ikke i Opera, siden all historikk caches uansett. -->
-    <property name="cacheSeconds" value="0"/>
-    <property name="useCacheControlHeader" value="true"/>
-    <property name="useCacheControlNoStore" value="true"/>
-    <property name="useExpiresHeader" value="true"/>
-  </bean>
+    <!-- Aktiverer annoteringer av klasser og metoder -->
+    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+        <property name="interceptors">
+            <bean class="no.mesan.spring.personregister.util.FlashScopeInterceptor"/>
+        </property>
+    </bean>
 
-  <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-    <description>
-      Binder ulike Exceptions til ulike jsp-sider
-    </description>
-  </bean>
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <!-- Deaktiverer caching med http headere.
+             Trykk på tilbake-knapp i nettleser skal føre til at data hentes på nytt.
+             Dette fungerer ikke i Opera, siden all historikk caches uansett. -->
+        <property name="cacheSeconds" value="0"/>
+        <property name="useCacheControlHeader" value="true"/>
+        <property name="useCacheControlNoStore" value="true"/>
+        <property name="useExpiresHeader" value="true"/>
+    </bean>
 
-  <bean id="jspViewResolver" class="no.mesan.spring.personregister.util.RedirectUtenParametreInternalResourceViewResolver">
-    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-    <property name="prefix" value="/WEB-INF/jspx/"/>
-    <property name="suffix" value=".jspx"/>
-  </bean>
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <description>
+            Binder ulike Exceptions til ulike jsp-sider
+        </description>
+    </bean>
 
-  <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+    <bean id="jspViewResolver" class="no.mesan.spring.personregister.util.RedirectUtenParametreInternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jspx/"/>
+        <property name="suffix" value=".jspx"/>
+    </bean>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 </beans>
