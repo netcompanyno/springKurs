@@ -94,7 +94,7 @@ public class HelloFormattingServiceXmlTest {
         assertTrue("Injectet bønne blir ikke kalt for å produsere tekst!",
                 xmlFormatter.harBlittKalt);
         assertTrue("XmlFormatter mangler interface!", TestHjelper.harInterface(XmlFormatter.class));
-        assertFalse("HelloFormattingServiceAnnotasjon har variabel for implementasjon (bør bruker interface)!",
+        assertFalse("HelloFormattingServiceXml har variabel for implementasjon (bør bruker interface)!",
                         TestHjelper.harFeltAvType(helloFormattingServiceXml, XmlFormatter.class));
     }
 
@@ -113,7 +113,7 @@ public class HelloFormattingServiceXmlTest {
         assertTrue("Injectet bønne blir ikke kalt for å produsere tekst!",
                 textFormatter.harBlittKalt);
         assertTrue("TextFormatter mangler interface!", TestHjelper.harInterface(TextFormatter.class));
-        assertFalse("HelloFormattingServiceAnnotasjon har variabel for implementasjon (bør bruker interface)!",
+        assertFalse("HelloFormattingServiceXml har variabel for implementasjon (bør bruker interface)!",
                         TestHjelper.harFeltAvType(helloFormattingServiceXml, TextFormatter.class));
     }
 
@@ -151,6 +151,5 @@ public class HelloFormattingServiceXmlTest {
      * TODO: Oppgave 5:
      *
      * Gjør om til constructor-arg injection hvis du brukte property-injection, og vice versa.
-     * (Gjelder det som ble gjort i oppgave 4/5)
      */
 }
