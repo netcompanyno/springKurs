@@ -1,5 +1,8 @@
 package no.mesan.spring.hello.util;
 
+import org.aopalliance.aop.Advice;
+import org.springframework.aop.framework.Advised;
+import org.springframework.aop.support.AopUtils;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
@@ -17,6 +20,16 @@ public class TestHjelper {
             return null;
         }
 
+        if(AopUtils.isAopProxy(objekt) && objekt instanceof Advised) {
+            Object target = null;
+            try {
+                target = ((Advised) objekt).getTargetSource().getTarget();
+            } catch (Exception e) {
+                throw new RuntimeException("Klarte ikke deproxy av Spring-bønne!");
+            }
+            return (T) ReflectionUtils.getField(felt, target);
+        }
+
         return (T) ReflectionUtils.getField(felt, objekt);
     }
 
@@ -25,8 +38,13 @@ public class TestHjelper {
     }
 
     private static Field hentFelt(final Class klasseForObjekt, final Class klasseViLeterEtter) {
+        Field ret = null;
         if (klasseViLeterEtter.getInterfaces().length == 1) {
-            return hentFeltViaNavnEllerKlasse(klasseForObjekt, null, klasseViLeterEtter.getInterfaces()[0]);
+            ret = hentFeltViaNavnEllerKlasse(klasseForObjekt, null, klasseViLeterEtter.getInterfaces()[0]);
+        }
+
+        if (ret != null) {
+            return ret;
         }
 
         return hentFeltViaNavnEllerKlasse(klasseForObjekt, null, klasseViLeterEtter);
@@ -46,4 +64,7 @@ public class TestHjelper {
         return klasse.getInterfaces().length > 0;
     }
 
+    public static boolean harFeltAvType(final Object object, final Class type) {
+        return hentFeltViaNavnEllerKlasse(object.getClass(), null, type) != null;
+    }
 }

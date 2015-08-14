@@ -10,7 +10,9 @@ import no.mesan.spring.hello.util.TestHjelper;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -28,6 +30,7 @@ import no.mesan.spring.hello.felles.HtmlFormatter;
 @ContextConfiguration("classpath:spring/applicationContext-annotasjon.xml")
 public class HelloFormattingServiceAnnotasjonTest {
 
+    @Lazy
     @Inject
     private HelloFormattingServiceAnnotasjon helloFormattingServiceAnnotasjon;
 
@@ -45,7 +48,11 @@ public class HelloFormattingServiceAnnotasjonTest {
     @Test
     @Ignore
     public void skalFinneVedHjelpAvComponentScan() {
-        assertNotNull("Mangler bønne for HelloFormattingServiceAnnotasjon!", helloFormattingServiceAnnotasjon);
+        try {
+            helloFormattingServiceAnnotasjon.getHello("du");
+        } catch (final NoSuchBeanDefinitionException e) {
+            fail("Mangler bønne for HelloFormattingServiceAnnotasjon!");
+        }
     }
 
     /**
@@ -71,6 +78,9 @@ public class HelloFormattingServiceAnnotasjonTest {
                    htmlFormatter);
         assertTrue("Injectet bønne blir ikke kalt for å produsere tekst!",
                    htmlFormatter.harBlittKalt);
+        assertTrue("HtmlFormatter mangler interface!", TestHjelper.harInterface(HtmlFormatter.class));
+        assertFalse("HelloFormattingServiceAnnotasjon har variabel for implementasjon (bør bruker interface)!",
+                    TestHjelper.harFeltAvType(helloFormattingServiceAnnotasjon, HtmlFormatter.class));
     }
 
     /**
@@ -88,10 +98,13 @@ public class HelloFormattingServiceAnnotasjonTest {
         final XmlFormatter xmlFormatter = TestHjelper.hentFeltAvType(helloFormattingServiceAnnotasjon,
                                                                      XmlFormatter.class);
         assertSame("XmlFormatter er ikke injectet i HelloFormattingServiceXml!",
-                   applicationContext.getBean(XmlFormatter.class),
-                   xmlFormatter);
+                applicationContext.getBean(XmlFormatter.class),
+                xmlFormatter);
         assertTrue("Injectet bønne blir ikke kalt for å produsere tekst!",
                 xmlFormatter.harBlittKalt);
+        assertTrue("XmlFormatter mangler interface!", TestHjelper.harInterface(XmlFormatter.class));
+        assertFalse("HelloFormattingServiceAnnotasjon har variabel for implementasjon (bør bruker interface)!",
+                TestHjelper.harFeltAvType(helloFormattingServiceAnnotasjon, XmlFormatter.class));
     }
 
     @Test
@@ -105,7 +118,10 @@ public class HelloFormattingServiceAnnotasjonTest {
                    applicationContext.getBean(TextFormatter.class),
                    textFormatter);
         assertTrue("Injectet bønne blir ikke kalt for å produsere tekst!",
-                   textFormatter.harBlittKalt);
+                textFormatter.harBlittKalt);
+        assertTrue("TextFormatter mangler interface!", TestHjelper.harInterface(TextFormatter.class));
+        assertFalse("HelloFormattingServiceAnnotasjon har variabel for implementasjon (bør bruker interface)!",
+                TestHjelper.harFeltAvType(helloFormattingServiceAnnotasjon, TextFormatter.class));
     }
 
     /**
