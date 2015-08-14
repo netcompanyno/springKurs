@@ -38,7 +38,7 @@ public class PersonKontroller {
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public String lagrePerson(final Person soknad,
+    public String lagrePerson(final Person person,
                               final Errors errors,
                               final ModelMap modell) {
         return "person";
