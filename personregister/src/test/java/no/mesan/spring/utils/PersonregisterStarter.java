@@ -6,6 +6,7 @@ package no.mesan.spring.utils;
  */
 public class PersonregisterStarter extends AbstractJettyStarter {
 
+    //OBS! Mac-brukere må angi full mappesti som parameter nummer 2 her..
     private PersonregisterStarter() {
         super(8080, "src/main/webapp", "/personregister");
     }

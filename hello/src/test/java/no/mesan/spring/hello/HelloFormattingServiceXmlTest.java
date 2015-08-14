@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import no.mesan.spring.hello.felles.HtmlFormatter;
 import no.mesan.spring.hello.felles.TextFormatter;
 import no.mesan.spring.hello.felles.XmlFormatter;
+import no.mesan.spring.hello.util.TestHjelper;
 import no.mesan.spring.hello.xml.HelloFormattingServiceXml;
 
 import org.junit.Before;
@@ -14,6 +15,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * Første sett med oppgaver, konfigurasjon av Spring vha xml.
+ *
+ * Kjør èn og èn test. Det er ikke meningen at flere tester skal kjøres samtidig.
  *
  * OBS! Det er ikke lov å endre denne filen!
  */
@@ -30,17 +33,17 @@ public class HelloFormattingServiceXmlTest {
     }
 
     /**
-     * Oppgave 1:
+     * TODO: Oppgave 1:
      * Definer en bønne for {@link HelloFormattingServiceXml} ved hjelp av xml, i filen applicationContext-xml.xml.
      */
     @Ignore
     @Test
     public void lagBonneForHelloFormattingService() {
-        assertNotNull(helloFormattingServiceXml);
+        assertNotNull("Mangler bønne for HelloFormattingServiceXml!", helloFormattingServiceXml);
     }
 
     /**
-     * Oppgave 2:
+     * TODO: Oppgave 2:
      * HelloFormattingService new-er HtmlFormatter. Vi ønsker nå å benytte Spring til å inject denne i stedet for å
      * kalle new.
      *
@@ -59,9 +62,16 @@ public class HelloFormattingServiceXmlTest {
     @Ignore
     @Test
     public void htmlFormatteringMedBonne() {
-        assertEquals("<b>Hello, <i>world</i>!</b>", helloFormattingServiceXml.getHello("world"));
+        assertEquals("<b>Hello, <i>world</i>!</b>",
+                     helloFormattingServiceXml.getHello("world"));
 
-        assertNotNull(applicationContext.getBean(HtmlFormatter.class));
+        assertNotNull("Mangler bønne for HtmlFormatter!", applicationContext.getBean(HtmlFormatter.class));
+        final HtmlFormatter htmlFormatter = TestHjelper.hentFeltAvType(helloFormattingServiceXml, HtmlFormatter.class);
+        assertSame("HtmlFormatter er ikke injectet i HelloFormattingServiceXml!",
+                   applicationContext.getBean(HtmlFormatter.class),
+                   htmlFormatter);
+        assertTrue("Injectet bønne blir ikke kalt for å produsere tekst!",
+                   htmlFormatter.harBlittKalt);
     }
 
     /**
@@ -74,7 +84,16 @@ public class HelloFormattingServiceXmlTest {
     @Test
     public void xmlFormatteringMedBonne() {
         assertEquals("<message to='world'><greet>Hello</greet></message>", helloFormattingServiceXml.getHello("world"));
-        assertNotNull(applicationContext.getBean(XmlFormatter.class));
+
+        assertNotNull("Mangler bønne for XmlFormatter!", applicationContext.getBean(XmlFormatter.class));
+
+        final XmlFormatter xmlFormatter = TestHjelper.hentFeltAvType(helloFormattingServiceXml, XmlFormatter.class);
+        assertSame("XmlFormatter er ikke injectet i HelloFormattingServiceXml!",
+                   applicationContext.getBean(XmlFormatter.class),
+                   xmlFormatter);
+        assertTrue("Injectet bønne blir ikke kalt for å produsere tekst!",
+                   xmlFormatter.harBlittKalt);
+        assertTrue("XmlFormatter mangler interface!", TestHjelper.harInterface(XmlFormatter.class));
     }
 
     /**
@@ -84,11 +103,18 @@ public class HelloFormattingServiceXmlTest {
     @Test
     public void textFormatteringMedBonne() {
         assertEquals("Hello, world!", helloFormattingServiceXml.getHello("world"));
-        assertNotNull(applicationContext.getBean(TextFormatter.class));
+
+        final TextFormatter textFormatter = TestHjelper.hentFeltAvType(helloFormattingServiceXml, TextFormatter.class);
+        assertSame("TextFormatter er ikke injectet i HelloFormattingServiceXml!",
+                   applicationContext.getBean(TextFormatter.class),
+                   textFormatter);
+        assertTrue("Injectet bønne blir ikke kalt for å produsere tekst!",
+                   textFormatter.harBlittKalt);
+        assertTrue("TextFormatter mangler interface!", TestHjelper.harInterface(TextFormatter.class));
     }
 
     /**
-     * Oppgave 3:
+     * TODO: Oppgave 3:
      * HelloFormattingService kan nå bare si hallo på ett språk. Derfor ønsker vi å gjøre tekststrengen som holder på
      * "Hello" konfigurerbart, og injecte denne ved hjelp av Spring. Sørg for at testen under blir grønn ved å injecte
      * riktig verdi.
@@ -102,13 +128,14 @@ public class HelloFormattingServiceXmlTest {
     }
 
     /**
-     * Oppgave 4 (bonus):
+     * TODO: Oppgave 4:
      *
      * Flytt definisjonen av hva "hallo" skal være ut i property-filen "spring.properties".
      *
      * Tips:
      *       - For å referere til en property, bruk: ${navn.pa.property}
      *       - Man må fortelle Spring hvor den finner properties...
+     *       - For mac-brukere må man også sette encoding av property-fil til UTF-8 (ved innlesing)
      */
     @Ignore
     @Test
@@ -117,7 +144,7 @@ public class HelloFormattingServiceXmlTest {
     }
 
     /**
-     * Oppgave 5 (bonus):
+     * TODO: Oppgave 5:
      *
      * Gjør om til constructor-arg injection hvis du brukte property-injection, og vice versa.
      * (Gjelder det som ble gjort i oppgave 4/5)
