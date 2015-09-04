@@ -12,8 +12,16 @@
     <module>hello</module>
     <module>personregister</module>
     <module>aspekter</module>
-    <module>gammelt</module>
   </modules>
+
+  <profiles>
+    <profile>
+      <id>gammel</id>
+      <modules>
+        <module>gammelt</module>
+      </modules>
+    </profile>
+  </profiles>
 
   <name>Mesan Springkurs</name>
   <url>http://www.mesan.no</url>
@@ -48,7 +56,7 @@
         <configuration>
           <source>1.7</source>
           <target>1.7</target>
-          <encoding>UTF-8</encoding>
+          <encoding>ISO-8859-1</encoding>
         </configuration>
       </plugin>
       <plugin>
