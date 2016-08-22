@@ -8,5 +8,8 @@
                                  http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
                                  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
                                  http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
-    <!-- TODO: Her må du legge inn nødvendig Spring-oppsett for å få kjørt personregisteret! -->
+  <!-- Gjør at man kan injecte xml-bønner inn i kontrollere. -->
+  <context:annotation-config />
+
+  <!-- TODO: Her må du legge inn nødvendig Spring-oppsett for å få kjørt personregisteret! -->
 </beans>
