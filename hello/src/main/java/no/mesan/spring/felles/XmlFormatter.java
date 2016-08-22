@@ -1,15 +1,14 @@
 package no.mesan.spring.felles;
 
-/** Format message as XML. */
-public class XmlFormatter  {
-
-    //Dette er egentlig fyfy da det er tilstand og public, men har det med for � f� sjekket at gaven er l�st
-    public boolean harBlittKalt;
+/**
+ * Formatterer beskjeder som XML.
+ */
+public class XmlFormatter extends NoeSomBrukesForASjekkeOppgaver {
 
     public String format(final String greet, final String recipient) {
-        harBlittKalt = true;
+        metodeKalt();
         return "<message to='" + recipient + "'>" +
-                "<greet>" + greet + "</greet>" +
-                "</message>";
+               "<greet>" + greet + "</greet>" +
+               "</message>";
     }
 }
