@@ -46,7 +46,7 @@ public class HelloFormattingServiceAnnotasjonTest {
      *      - Spring må kunne kjenne igjen klassene som det skal lages bønner av..
      */
     @Test
-//    @Ignore
+    @Ignore
     public void skalFinneVedHjelpAvComponentScan() {
         try {
             helloFormattingServiceAnnotasjon.getHello("du");
@@ -66,7 +66,7 @@ public class HelloFormattingServiceAnnotasjonTest {
     }
 
     @Test
-//    @Ignore
+    @Ignore
     public void htmlFormatteringMedBonne() {
         assertEquals("<b>Hello, <i>world</i>!</b>", helloFormattingServiceAnnotasjon.getHello("world"));
 
