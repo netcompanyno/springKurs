@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import no.mesan.spring.felles.TextFormatter;
 import no.mesan.spring.felles.XmlFormatter;
 import no.mesan.spring.util.TestHjelper;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
@@ -46,7 +45,6 @@ public class HelloFormattingServiceAnnotasjonTest {
      *      - Spring må kunne kjenne igjen klassene som det skal lages bønner av..
      */
     @Test
-    @Ignore
     public void skalFinneVedHjelpAvComponentScan() {
         try {
             helloFormattingServiceAnnotasjon.getHello("du");
@@ -60,13 +58,11 @@ public class HelloFormattingServiceAnnotasjonTest {
      * Bruk annotasjoner til å injecte {@link HtmlFormatter} i stedet for å new-e.
      */
     @Test
-    @Ignore
     public void sePaUtskrift() {
         System.out.println(helloFormattingServiceAnnotasjon.getHello("world"));
     }
 
     @Test
-    @Ignore
     public void htmlFormatteringMedBonne() {
         assertEquals("<b>Hello, <i>world</i>!</b>", helloFormattingServiceAnnotasjon.getHello("world"));
 
@@ -88,7 +84,6 @@ public class HelloFormattingServiceAnnotasjonTest {
      *      - Bruk @Named for å injecte en bestemt implementasjon av Formatter-interface.
      */
     @Test
-    @Ignore
     public void xmlFormatteringMedBonne() {
         assertEquals("<message to='world'><greet>Hello</greet></message>",
                      helloFormattingServiceAnnotasjon.getHello("world"));
@@ -108,7 +103,6 @@ public class HelloFormattingServiceAnnotasjonTest {
     }
 
     @Test
-    @Ignore
     public void textFormatteringMedBonne() {
         assertEquals("Hello, world!", helloFormattingServiceAnnotasjon.getHello("world"));
 
@@ -134,7 +128,6 @@ public class HelloFormattingServiceAnnotasjonTest {
      *     - Spring må vite hvor properties ligger..
      */
     @Test
-    @Ignore
     public void holaMundo() {
         assertEquals("¡Hola, mundo!", helloFormattingServiceAnnotasjon.getHello("mundo"));
     }

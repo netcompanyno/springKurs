@@ -9,7 +9,6 @@ import no.mesan.spring.util.TestHjelper;
 import no.mesan.spring.oppgave1.HelloFormattingServiceXml;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -18,7 +17,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  *
  * Kjør èn og èn test. Det er ikke meningen at flere tester skal kjøres samtidig.
  *
- * OBS! Det er ikke lov å endre denne filen!
+ * OBS! Det er ikke lov å endre denne filen, bortsett fra fjerning/utkommentering av Ignore-annotasjoner.
  */
 public class HelloFormattingServiceXmlTest {
 
@@ -36,7 +35,6 @@ public class HelloFormattingServiceXmlTest {
      * TODO: Oppgave 1:
      * Definer en bønne for {@link HelloFormattingServiceXml} ved hjelp av xml, i filen applicationContext-xml.xml.
      */
-    @Ignore
     @Test
     public void lagBonneForHelloFormattingService() {
         assertNotNull("Mangler bønne for HelloFormattingServiceXml!", helloFormattingServiceXml);
@@ -50,7 +48,6 @@ public class HelloFormattingServiceXmlTest {
      * Bruk testen sePaUtskrift for å se hva {@link HelloFormattingServiceXml} produserer.
      * Få deretter testene under til å kjøre, en og en (alle blir ikke grønne samtidig..)
      */
-    @Ignore
     @Test
     public void sePaUtskrift() {
         System.out.println(helloFormattingServiceXml.getHello("world"));
@@ -59,7 +56,6 @@ public class HelloFormattingServiceXmlTest {
     /**
      * Sørg for å injecte en bønne av klassen HtmlFormatter i HelloFormattingServiceXml.
      */
-    @Ignore
     @Test
     public void htmlFormatteringMedBonne() {
         assertEquals("<b>Hello, <i>world</i>!</b>",
@@ -80,7 +76,6 @@ public class HelloFormattingServiceXmlTest {
      * Man ønsker ikke å måtte endre på HelloFormattingServiceXml hver gang man bytter formaterer. Har formatererene noe
      * til felles som gjør at man kan definere en variabel i HelloFormattingServiceXml som kan holde på en vilkårlig av dem?
      */
-    @Ignore
     @Test
     public void xmlFormatteringMedBonne() {
         assertEquals("<message to='world'><greet>Hello</greet></message>", helloFormattingServiceXml.getHello("world"));
@@ -101,7 +96,6 @@ public class HelloFormattingServiceXmlTest {
     /**
      * Sørg for å injecte en bønne av klassen TextFormatter i HelloFormattingServiceXml.
      */
-    @Ignore
     @Test
     public void textFormatteringMedBonne() {
         assertEquals("Hello, world!", helloFormattingServiceXml.getHello("world"));
@@ -120,12 +114,13 @@ public class HelloFormattingServiceXmlTest {
     /**
      * TODO: Oppgave 3:
      * HelloFormattingService kan nå bare si hallo på ett språk. Derfor ønsker vi å gjøre tekststrengen som holder på
-     * "Hello" konfigurerbart, og injecte denne ved hjelp av Spring. Sørg for at testen under blir grønn ved å injecte
-     * riktig verdi.
+     * "Hello" konfigurerbart, og injecte denne ved hjelp av Spring.
+     * Sørg for at testen under blir grønn ved å injecte riktig verdi.
+     *
+     * Inject verdien "¡Hola" inn i bønne.
      *
      * - For enkelhets skyld, bruk {@link TextFormatter}.
      */
-    @Ignore
     @Test
     public void holaMundo() {
         assertEquals("¡Hola, mundo!", helloFormattingServiceXml.getHello("mundo"));
@@ -134,14 +129,14 @@ public class HelloFormattingServiceXmlTest {
     /**
      * TODO: Oppgave 4:
      *
-     * Gjør konstanten "GREET" konfigurerbar, og hent dens verdi fra property-filen "spring.properties".
+     * Vi ønsker ikke tekststrenger i spring-oppsettet.
+     * Bytt derfor ut tekststrengen med verdi fra property-filen "spring.properties".
      *
      * Tips:
      *       - For å referere til en property, bruk: ${navn.pa.property}
      *       - Man må fortelle Spring hvor den finner properties...
      *       - For mac-brukere må man også sette encoding av property-fil til UTF-8 (ved innlesing)
      */
-    @Ignore
     @Test
     public void bonjourMonde() {
         assertEquals("Bonjour, monde!", helloFormattingServiceXml.getHello("monde"));
