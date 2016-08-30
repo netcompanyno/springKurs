@@ -12,7 +12,7 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
  * @author Torbjørn S. Knutsen
  */
 @Configuration
-@ComponentScan(basePackages = "no.mesan.spring.oppgave3")
+@ComponentScan(basePackages = "no.mesan.springo.oppgave3")
 @PropertySource("classpath:spring.properties")
 public class Oppgave3Config {
     @Bean
