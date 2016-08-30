@@ -135,7 +135,7 @@ public class HelloFormattingServiceAnnotasjonTest {
     /**
      * TODO: Oppgave 4:
      *
-     * Prøv å blande annotasjoner og xml, ved å fjerne annotasjoner på fra *Formatter-klassene og definere bønner for
-     * disse vha xml.
+     * Prøv å blande annotasjoner og xml, ved å fjerne annotasjoner på fra TextFormatter-klassen og definere bønner for
+     * denne vha xml. Bruke "holaMundo()" til å teste.
      */
 }
