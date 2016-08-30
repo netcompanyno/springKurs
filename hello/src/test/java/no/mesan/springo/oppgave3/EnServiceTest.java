@@ -1,4 +1,4 @@
-package no.mesan.spring.oppgave3;
+package no.mesan.springo.oppgave3;
 
 import org.junit.Ignore;
 import org.junit.Test;
