@@ -1,4 +1,4 @@
-package no.mesan.spring.felles;
+package no.mesan.spring.felles.ikke.ror;
 
 /**
  * Felles superklasse for formatterene.
