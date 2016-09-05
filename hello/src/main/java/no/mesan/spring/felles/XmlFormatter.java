@@ -1,7 +1,11 @@
 package no.mesan.spring.felles;
 
+import no.mesan.spring.felles.ikke.ror.NoeSomBrukesForASjekkeOppgaver;
+
 /**
  * Formatterer beskjeder som XML.
+ *
+ * Denne filen kan endres!
  */
 public class XmlFormatter extends NoeSomBrukesForASjekkeOppgaver {
 
