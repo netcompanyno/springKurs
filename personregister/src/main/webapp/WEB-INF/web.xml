@@ -109,7 +109,7 @@
   <!--<context-param>-->
   <!--<param-name>contextConfigLocation</param-name>-->
   <!--<param-value>-->
-  <!--Konfigurasjon-->
+  <!--com.netcompany.spring.personregister.config.Konfigurasjon-->
   <!--</param-value>-->
   <!--</context-param>-->
 
