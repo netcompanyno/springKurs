@@ -14,17 +14,8 @@
     <module>aspekter</module>
   </modules>
 
-  <profiles>
-    <profile>
-      <id>gammel</id>
-      <modules>
-        <module>gammelt</module>
-      </modules>
-    </profile>
-  </profiles>
-
   <name>Netcompany Springkurs</name>
-  <url>http://www.mesan.no</url>
+  <url>https://www.netcompany.com</url>
 
   <build>
     <plugins>
