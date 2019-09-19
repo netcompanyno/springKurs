@@ -10,7 +10,6 @@
   <version>0.0.1-SNAPSHOT</version>
   <modules>
     <module>hello</module>
-    <module>personregister</module>
     <module>aspekter</module>
   </modules>
 

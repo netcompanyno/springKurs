@@ -5,16 +5,20 @@ import java.util.List;
 import com.netcompany.spring.personregister.domain.Person;
 import com.netcompany.spring.personregister.repository.PersonRepository;
 import org.joda.time.LocalDate;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 
 /**
  * Standard implementasjon av {@link PersonService}.
  *
  * @author Torbjørn S. Knutsen
  */
+@Service
 public class PersonServiceImpl implements PersonService {
 
+    @Inject
     private PersonRepository personRepository;
 
     /**
