@@ -9,12 +9,14 @@ import javax.persistence.TypedQuery;
 import com.netcompany.spring.personregister.domain.Person;
 
 import org.apache.commons.lang3.Validate;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * JPA-implementasjon av {@link PersonRepository}.
  *
  * @author Torbjørn S. Knutsen
  */
+@Transactional
 public class PersonRepositoryJPA implements PersonRepository {
 
     @PersistenceContext

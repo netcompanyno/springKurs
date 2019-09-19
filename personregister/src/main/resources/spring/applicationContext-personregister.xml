@@ -10,6 +10,7 @@
                                  http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
   <!-- Gjør at man kan injecte xml-bønner inn i kontrollere. -->
   <context:annotation-config />
+  <tx:annotation-driven />
 
   <!-- TODO: Her må du legge inn nødvendig Spring-oppsett for å få kjørt personregisteret! -->
 </beans>

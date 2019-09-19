@@ -1,0 +1,21 @@
+Oppgaver Maven-kurs (og litt Spring/Spring Boot)
+
+OBS! Bruk Java8 jdk.
+
+1. PersonregisterStarter og AbstractJettyStarter er nå kun tilgjengelig for test. Vi ønsker å bruke disse også ved
+   kjøring i praksis. Flytt klassene fra test-kode til main-kode, og kjør PersonregisterStarter.
+   - Her må man nok endre scope på enkelte avhengigheter for at ting skal fungere
+   - Dersom du får en feilmelding fra Spring om at bønner ikke er definert kan denne oppgaven anses som ferdig
+2. Noen har spist opp masse Spring-config! Det må ordnes opp i!
+   - Entrypoint for Spring er applicationContext-personregister.xml. Legg til xml for component-scan her
+   - En del Spring-servicer mangler @Service-annotasjon
+   - Når applikasjonen kjører, besøk http://localhost:8080/personregister. Kanskje det mangler litt @Autowired også?
+   - Nå ser du kanskje at det ligger en person inne? Legg til deg selv, da vel, via PersonServiceImpl.
+3. Spring er så 2007. Nå er det Spring Boot som gjelder! Konverter Personregister til Spring Boot
+   - Legg på Spring Boot som parent i pom
+   -- Husk at applikasjonen allerede har en parent. Kanskje man mister noe viktig ved å bryte dette båndet?
+   - Ta i bruk en eller flere spring-boot-startere
+   - Rydd i pom, fjern avhengigheter som ikke lenger trengs
+   - Erstatt AbstractJettyStarter/PersonregisterStarter med en @SpringBootApplication main-klasse
+   - Erstatt log4j-oppsettet med Spring Boot sitt logback-oppsett
+   - Jeg har ikke testet noe av dette, lykke til!
