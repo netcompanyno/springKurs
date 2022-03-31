@@ -39,7 +39,7 @@
   </build>
 
   <properties>
-    <spring.version>4.0.6.RELEASE</spring.version>
+    <spring.version>5.3.18</spring.version>
     <junit.version>4.11</junit.version>
   </properties>
 
